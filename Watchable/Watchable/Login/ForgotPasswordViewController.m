@@ -540,5 +540,9 @@
         self.mConfirmationSuccessView = nil;
     }
 }
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 @end

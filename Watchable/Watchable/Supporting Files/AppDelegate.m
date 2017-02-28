@@ -71,7 +71,7 @@
 
     [self clearTokens];
     [self initializeGoogleAnalyticsForWatchable];
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    // [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
 
     TweaksEnabler *tweaksEnabler = [[TweaksEnabler alloc] init];
     self.window = (UIWindow *)[tweaksEnabler tweakableWindowWithFrame:[[UIScreen mainScreen] bounds]];
@@ -1352,7 +1352,7 @@
     {
         return nil;
     }
-    _managedObjectContext = [[NSManagedObjectContext alloc] init];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:(NSMainQueueConcurrencyType)];
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
 }
@@ -1439,16 +1439,13 @@
 #pragma mark Swrve Notification
 - (void)registerForPushNotifications
 {
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    {
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-    else
-    {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound];
-    }
+#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 80000
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert | UIUserNotificationTypeBadge | UIUserNotificationTypeSound categories:nil];
+    [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+#else
+    [[UIApplication sharedApplication] registerForRemoteNotificationTypes(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+#endif
 
     [[UIApplication sharedApplication] setMinimumBackgroundFetchInterval:UIApplicationBackgroundFetchIntervalMinimum];
     [UIApplication sharedApplication].applicationIconBadgeNumber = 0;

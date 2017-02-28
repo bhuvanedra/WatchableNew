@@ -73,6 +73,9 @@ static NSTimeInterval const kViewControllerFadeControlsOutAnimationDuration = .2
 @property (nonatomic) BOOL isRewindTapped;
 @property (nonatomic, strong) NSString *mCurrentPostingVideoId;
 
+@property (nonatomic, assign) BOOL isStatusBarHidden;
+@property (nonatomic) UIStatusBarAnimation stausBarAnimation;
+
 - (IBAction)fullScreenCliked:(id)sender;
 - (IBAction)shareClicked:(id)sender;
 - (IBAction)addToPlayListClicked:(id)sender;
@@ -1230,7 +1233,11 @@ static NSTimeInterval const kViewControllerFadeControlsOutAnimationDuration = .2
         if ([_delegate respondsToSelector:@selector(handleEnterFullScreenButtonPressed)])
         {
             [_delegate handleEnterFullScreenButtonPressed];
-            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+
+            _isStatusBarHidden = YES;
+            _stausBarAnimation = UIStatusBarAnimationFade;
+
+            //            [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
         }
     }
     else
@@ -1631,6 +1638,16 @@ static NSTimeInterval const kViewControllerFadeControlsOutAnimationDuration = .2
     {
         [self pauseMoviePlayer];
     }
+}
+
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return self.stausBarAnimation;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.isStatusBarHidden;
 }
 
 @end

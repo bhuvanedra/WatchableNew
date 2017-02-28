@@ -100,6 +100,8 @@
 @property (nonatomic, assign) BOOL isViewDisappeared;
 
 @property (nonatomic, assign) float mScrollHeightForBreakLock;
+@property (nonatomic, assign) BOOL isHidden;
+@property (nonatomic) UIStatusBarAnimation stausBarAnimation;
 @end
 
 @implementation PlayDetailViewController
@@ -155,6 +157,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [self setNeedsStatusBarAppearanceUpdate];
     self.isViewDisappeared = NO;
     self.isFetchPlayBackURIWithMaxBitRate = YES;
     self.mPreviousVideoPlayIndex = -1;
@@ -427,7 +430,9 @@
 
     if (self.mDetailView)
     {
-        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+        [self setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+
+        //        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 
         NSLog(@"%ld,%ld", self.mSelectedIndexPath.row, self.mVideoListDataSource.count + 2);
 
@@ -438,7 +443,9 @@
     }
     else
     {
-        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+        [self setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
+        //        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     }
 }
 
@@ -838,7 +845,9 @@
             {
                 @try
                 {
-                    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+                    [self setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+
+                    //                    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 
                     self.isMoviePlayerInFullScreen = YES;
                     self.controlsViewController.isEntredFullScreen = YES;
@@ -881,7 +890,9 @@
                                            self.videoView.frame = self.cgRectVideoViewFullScreen;
                                            [self.controlsViewController hidePlyerControls];
 
-                                           [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+                                           [self setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+
+                                           //                                           [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
                                            if (self.isEpisodeClicked || self.isLogoClicked || self.isFromGenre)
                                            {
                                                [self.controlsViewController setProviderImageForUrl:self.mChannelDataModel.imageUri];
@@ -907,13 +918,17 @@
                 {
                     if (self.mDetailView)
                     {
-                        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+                        [self setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+
+                        //                        [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
                         [self setNavBarVisiblityWithAlpha:0.0];
                         self.controlsViewController.infoButtonForShowingDetailsView.hidden = YES;
                     }
                     else
                     {
-                        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+                        [self setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
+                        //                        [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
                         [self setNavBarVisiblityWithAlpha:kNavBarMaxAlphaValue];
                         self.controlsViewController.infoButtonForShowingDetailsView.hidden = NO;
                     }
@@ -3159,7 +3174,9 @@
 
 - (void)handleEnterFullScreenButtonPressed
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+    [self setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
+
+    //    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationFade];
 
     NSNumber *value = [NSNumber numberWithInt:UIInterfaceOrientationLandscapeLeft];
     [[UIDevice currentDevice] setValue:value forKey:@"orientation"];
@@ -4593,7 +4610,9 @@
     {
         aModel.channelInfo = self.mChannelDataModel;
     }
-    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+    [self setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
+
+    //    [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
 
     if (indexPath)
     {
@@ -4654,7 +4673,9 @@
 
 - (void)removeVideoDetailView
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone]; //Added from BC : Modified AB
+    [self setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
+    //    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone]; //Added from BC : Modified AB
     self.controlsViewController.infoButtonForShowingDetailsView.hidden = NO;
 
     CGRect aFrame = self.mDetailView.frame;
@@ -4683,7 +4704,9 @@
 
 - (void)removeVideoDetailViewForlastVideoInPlayList
 {
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone]; //Added from BC : Modified AB
+    [self setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
+    //    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone]; //Added from BC : Modified AB
     self.controlsViewController.infoButtonForShowingDetailsView.hidden = NO;
 
     CGRect aFrame = self.mDetailView.frame;
@@ -4949,7 +4972,10 @@
                     self.controlsViewController.PublisherImg.hidden = YES;
                     self.controlsViewController.placeholderText.hidden = YES;
                     [self hideNarBarWithShareAddButton:NO];
-                    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
+                    [self setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
+                    //                    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 
                     [self.controlsViewController.fullscreenButton setImage:[UIImage imageNamed:@"playerExpand.png"] forState:UIControlStateNormal];
 
@@ -5127,7 +5153,10 @@
                     self.controlsViewController.PublisherImg.hidden = YES;
                     self.controlsViewController.placeholderText.hidden = YES;
                     [self hideNarBarWithShareAddButton:NO];
-                    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
+                    [self setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+
+                    //                    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 
                     [self.controlsViewController.fullscreenButton setImage:[UIImage imageNamed:@"playerExpand.png"] forState:UIControlStateNormal];
 
@@ -5517,6 +5546,22 @@
 {
     [self.controlsViewController exitFullScrenWhenSignUpAndLogin];
     [self breakVideoLockSetUp];
+}
+
+- (void)setStatusBarHidden:(BOOL)hidden withAnimation:(UIStatusBarAnimation)animation
+{
+    _isHidden = hidden;
+    _stausBarAnimation = animation;
+    [self setNeedsStatusBarAppearanceUpdate];
+}
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return self.stausBarAnimation;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.isHidden;
 }
 
 @end

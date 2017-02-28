@@ -31,6 +31,8 @@
 @property (nonatomic, strong) Reachability *internetReachable;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 @property (nonatomic) BOOL isrefreshing;
+@property (nonatomic, assign) BOOL isStatusBarHidden;
+@property (nonatomic) UIStatusBarAnimation stausBarAnimation;
 @end
 
 @implementation PlayListViewController
@@ -45,12 +47,15 @@
     }
     [self initialSetUp];
     [self getDataFromServer];
+    [self setNeedsStatusBarAppearanceUpdate];
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    _isStatusBarHidden = NO;
+    _stausBarAnimation = UIStatusBarAnimationNone;
+    //    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
 
     [[SwrveUtility sharedInstance] postSwrveEvent:kSwrveplaylistHome];
     if (self.isrefreshing)
@@ -694,4 +699,26 @@
                                                    }];
 }
 
+- (UIStatusBarAnimation)preferredStatusBarUpdateAnimation
+{
+    return self.stausBarAnimation;
+}
+
+- (BOOL)prefersStatusBarHidden
+{
+    return self.isStatusBarHidden;
+}
+
+@end
+@interface UINavigationController (StatusBarStyle)
+
+@end
+
+@implementation UINavigationController (StatusBarStyle)
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    //also you may add any fancy condition-based code here
+    return UIStatusBarStyleLightContent;
+}
 @end

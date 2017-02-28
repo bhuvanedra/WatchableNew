@@ -825,5 +825,9 @@
           [self shake:theOneYouWannaShake];
         }];
 }
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 @end

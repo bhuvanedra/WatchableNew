@@ -4287,12 +4287,19 @@
 
 - (NSString *)encodeToPercentEscapeString:(NSString *)aString
 {
-    NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
-        NULL,
-        (__bridge CFStringRef)aString,
-        NULL,
-        CFSTR("!*'();:@&=+$,/?%#[]\" "),
-        kCFStringEncodingUTF8));
+    NSCharacterSet *characterSet = [NSCharacterSet
+                                       characterSetWithCharactersInString:@"!*'();:@&=+$,/?%#[]\""]
+                                       .invertedSet;
+
+    NSString *escapedString = [aString
+        stringByAddingPercentEncodingWithAllowedCharacters:characterSet];
+
+    //    NSString *escapedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(
+    //        NULL,
+    //        (__bridge CFStringRef)aString,
+    //        NULL,
+    //        CFSTR("!*'();:@&=+$,/?%#[]\" "),
+    //        kCFStringEncodingUTF8));
     return escapedString;
 }
 

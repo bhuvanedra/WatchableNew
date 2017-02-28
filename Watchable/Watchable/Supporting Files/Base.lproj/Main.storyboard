@@ -39,7 +39,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlayListCellId" id="gXC-5h-N4z" customClass="PlayListCollectionViewCell">
-                                        <rect key="frame" x="27.5" y="0.0" width="320" height="250"/>
+                                        <rect key="frame" x="28" y="0.0" width="320" height="250"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="250"/>
@@ -135,6 +135,7 @@
         <scene sceneID="u49-ye-vIm">
             <objects>
                 <navigationController storyboardIdentifier="LoginViewNavigationController" navigationBarHidden="YES" id="VYb-DC-255" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="EgJ-8C-nHS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -979,6 +980,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QoW-s7-SiY" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="tabPlaylists.png" id="UxR-M9-tCF"/>
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="375" height="667"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="QgR-Ya-UIx">
@@ -1095,6 +1097,7 @@
                     <tabBarItem key="tabBarItem" title="" image="tabMyShows.png" id="qR2-M8-qgy">
                         <offsetWrapper key="titlePositionAdjustment" horizontal="0.0" vertical="0.0"/>
                     </tabBarItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="6Vc-OE-GuC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1113,6 +1116,7 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gEi-7Z-IYB" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="tabBrowse.png" id="HLj-g0-qt8"/>
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="XqQ-U0-Aoa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1146,10 +1150,10 @@
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="0.0" reuseIdentifier="MyShowsCustomCell" rowHeight="408" id="RQW-lc-E7m" customClass="MyShowsCustomCell">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="408"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="408"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RQW-lc-E7m" id="La2-18-WuP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="407.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="407"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="YGj-YY-qUg">
@@ -1297,10 +1301,10 @@
                                 <color key="separatorColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HistoryCustomCell" rowHeight="96" id="7xz-0i-FKW" customClass="HistoryCustomCell">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="96"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="96"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7xz-0i-FKW" id="48h-pO-NaO">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="95.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="95"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="PoB-49-uK9">
@@ -1495,10 +1499,10 @@
                                 <color key="backgroundColor" red="0.93725490196078431" green="0.93725490196078431" blue="0.95686274509803926" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" restorationIdentifier="EmailCell" selectionStyle="default" indentationWidth="10" reuseIdentifier="EmailCell" id="Vim-5W-f9k" customClass="EmailNotificationTableViewCell">
-                                        <rect key="frame" x="0.0" y="55.5" width="383" height="44"/>
+                                        <rect key="frame" x="0.0" y="56" width="383" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vim-5W-f9k" id="baP-ay-qML">
-                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="383" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cbS-nV-IG3">
@@ -1823,7 +1827,7 @@
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GenereListCellId" id="zVm-MR-Hl9" customClass="PlayListCollectionViewCell">
-                                        <rect key="frame" x="27.5" y="330" width="320" height="90"/>
+                                        <rect key="frame" x="28" y="330" width="320" height="90"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>

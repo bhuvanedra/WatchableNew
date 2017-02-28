@@ -1198,5 +1198,9 @@
 {
     [self.view endEditing:YES]; // this will do the trick
 }
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
 
 @end
