@@ -7,12 +7,12 @@
 //
 
 #import "MoviePlayerSingleton.h"
-#import <MediaPlayer/MediaPlayer.h>
+#import <AVKit/AVKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "WatchableConstants.h"
 #define kMovieUrl
 
-static MPMoviePlayerController *aMoviePlayer = nil;
+static AVPlayerViewController *aMoviePlayer = nil;
 @implementation MoviePlayerSingleton
 
 + (MoviePlayerSingleton *)sharedInstance
@@ -27,18 +27,17 @@ static MPMoviePlayerController *aMoviePlayer = nil;
     return sharedInstance;
 }
 
-+ (MPMoviePlayerController *)moviePlayer
++ (AVPlayerViewController *)moviePlayer
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
 
       //[[MPMusicPlayerController applicationMusicPlayer] setVolume:0];
 
-      aMoviePlayer = [[MPMoviePlayerController alloc] init];
+      aMoviePlayer = [[AVPlayerViewController alloc] init];
       aMoviePlayer.view.userInteractionEnabled = YES;
-      aMoviePlayer.controlStyle = MPMovieControlStyleNone;
+      aMoviePlayer.showsPlaybackControls = NO;
       //aMoviePlayer.useApplicationAudioSession = YES;
-      [aMoviePlayer prepareToPlay];
       [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
 
     });
@@ -51,7 +50,8 @@ static MPMoviePlayerController *aMoviePlayer = nil;
 }
 + (void)stopMoviePlayer
 {
-    [aMoviePlayer stop];
+    [aMoviePlayer.player pause];
+    aMoviePlayer.player = nil;
 }
 
 + (void)playMoviePlayerWithContentURLStr:(NSString *)aStr
@@ -73,10 +73,9 @@ static MPMoviePlayerController *aMoviePlayer = nil;
     // NSURL *aUrl=  [NSURL fileURLWithPath:aString];
 
     [MoviePlayerSingleton stopMoviePlayer];
-    aMoviePlayer.contentURL = aUrl;
+    aMoviePlayer.player = [AVPlayer playerWithURL:aUrl];
 
-    [aMoviePlayer prepareToPlay];
-    [aMoviePlayer play];
+    [aMoviePlayer.player play];
 }
 + (UIView *)getMoviePlayerView
 {
@@ -88,26 +87,26 @@ static MPMoviePlayerController *aMoviePlayer = nil;
     // [[MPMusicPlayerController applicationMusicPlayer] setVolume:.3];
     // aMoviePlayer.useApplicationAudioSession = YES;
     // aMoviePlayer.controlStyle = MPMovieControlStyleEmbedded;
-    aMoviePlayer.controlStyle = MPMovieControlStyleNone;
+    aMoviePlayer.showsPlaybackControls = NO;
 }
 
 + (void)removeDefaultControls
 {
     // [[MPMusicPlayerController applicationMusicPlayer] setVolume:.3];
     // aMoviePlayer.useApplicationAudioSession = YES;
-    aMoviePlayer.controlStyle = MPMovieControlStyleNone;
+    aMoviePlayer.showsPlaybackControls = NO;
 }
 
 + (void)setFullScreen
 {
-    [aMoviePlayer setFullscreen:YES animated:YES];
+    //    [aMoviePlayer.player setFullscreen:YES animated:YES];
     // aMoviePlayer.controlStyle = MPMovieControlStyleEmbedded;
-    aMoviePlayer.controlStyle = MPMovieControlStyleNone;
+    aMoviePlayer.showsPlaybackControls = NO;
 }
 
 + (void)setNonFullScreen
 {
-    [aMoviePlayer setFullscreen:NO animated:YES];
+    //    [aMoviePlayer setFullscreen:NO animated:YES];
 }
 
 @end

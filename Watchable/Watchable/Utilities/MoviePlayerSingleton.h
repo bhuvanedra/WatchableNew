@@ -9,11 +9,11 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 #import <UIKit/UIKit.h>
-@class MPMoviePlayerController;
+@class AVPlayerViewController;
 @interface MoviePlayerSingleton : NSObject
 
 + (MoviePlayerSingleton *)sharedInstance;
-+ (MPMoviePlayerController *)moviePlayer;
++ (AVPlayerViewController *)moviePlayer;
 + (void)setMoviePlayerFrame:(CGRect)aFrame;
 + (UIView *)getMoviePlayerView;
 + (void)stopMoviePlayer;

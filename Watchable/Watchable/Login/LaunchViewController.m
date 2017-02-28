@@ -8,7 +8,8 @@
 
 #import "LaunchViewController.h"
 #import "Utilities.h"
-#import <MediaPlayer/MediaPlayer.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
 #import "SignUpViewController.h"
 #import "LoginViewController.h"
 #import "SwrveUtility.h"
@@ -30,9 +31,7 @@ typedef enum {
 @property (nonatomic, strong) UIView *mSignupAndLoginButtonBGView;
 @property (nonatomic, strong) UIImageView *mLandingImageView;
 @property (nonatomic, strong) UIPageControl *mPageControl;
-@property (nonatomic, strong) MPMoviePlayerController *mFirstMoviePlayer;
-@property (nonatomic, strong) MPMoviePlayerController *mSecondMoviePlayer;
-@property (nonatomic, strong) MPMoviePlayerController *mThirdMoviePlayer;
+@property (nonatomic, strong) AVPlayer *mFirstMoviePlayer;
 @property (nonatomic, assign) UIView *mCurrentShowingView;
 
 @end
@@ -72,38 +71,27 @@ typedef enum {
         [self.mFirstMoviePlayer play];
     }
 }
-
+- (void)didPlayToEndTime
+{
+    [self.mFirstMoviePlayer seekToTime:CMTimeMakeWithSeconds(0, 1)];
+    [self.mFirstMoviePlayer play];
+}
 - (void)addMoviePlayer
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didPlayToEndTime) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     NSString *aString = [[NSBundle mainBundle] pathForResource:@"MyShowsTutorial" ofType:@"mp4"];
     NSURL *aUrl = [NSURL fileURLWithPath:aString];
-    self.mFirstMoviePlayer = [[MPMoviePlayerController alloc] initWithContentURL:aUrl];
-    self.mFirstMoviePlayer.controlStyle = MPMovieControlStyleNone;
-    self.mFirstMoviePlayer.repeatMode = MPMovieRepeatModeOne;
-    self.mFirstMoviePlayer.scalingMode = MPMovieScalingModeAspectFill;
-
-    self.mFirstMoviePlayer.backgroundView.backgroundColor = [UIColor clearColor];
-    self.mFirstMoviePlayer.view.backgroundColor = [UIColor clearColor];
-
-    [self.mFirstMoviePlayer.view setFrame:self.view.bounds];
-    UIImage *athumbnail = [UIImage imageNamed:@"MyShowsTutorialFirstFrame.png"];
-
-    UIImageView *aPlayerBgImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
-    aPlayerBgImageView.image = athumbnail;
-    aPlayerBgImageView.contentMode = UIViewContentModeScaleAspectFill;
-
-    [aPlayerBgImageView addSubview:self.mFirstMoviePlayer.view];
-    [self.mMovieBGView addSubview:aPlayerBgImageView];
-
-    UIImageView *PlayerBgImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    PlayerBgImageView.image = athumbnail;
-    PlayerBgImageView.contentMode = UIViewContentModeScaleAspectFill;
-
-    [self.mFirstMoviePlayer.backgroundView addSubview:PlayerBgImageView];
-
-    [self.mFirstMoviePlayer prepareToPlay];
+    self.mFirstMoviePlayer = [AVPlayer playerWithURL:aUrl];
+    AVPlayerViewController *playerController = [[AVPlayerViewController alloc] init];
+    playerController.view.backgroundColor = [UIColor clearColor];
+    playerController.videoGravity = AVLayerVideoGravityResizeAspectFill;
+    playerController.showsPlaybackControls = NO;
+    playerController.player = self.mFirstMoviePlayer;
+    [playerController.view setFrame:self.view.bounds];
     [self.mFirstMoviePlayer play];
     self.view.userInteractionEnabled = YES;
+    playerController.view.frame = self.view.frame;
+    [self.view insertSubview:playerController.view atIndex:0];
 
     UIImage *aLoginLogoImg = [UIImage imageNamed:@"watchableLogo_login"];
     UIImageView *aLoginLogo = [[UIImageView alloc] initWithFrame:CGRectMake((self.view.frame.size.width - aLoginLogoImg.size.width) / 2, (self.view.frame.size.height / 2) - aLoginLogoImg.size.height, aLoginLogoImg.size.width, aLoginLogoImg.size.height)];
@@ -240,8 +228,9 @@ typedef enum {
 
 - (void)dealloc
 {
-    [self.mFirstMoviePlayer stop];
+    [self.mFirstMoviePlayer pause];
     self.mFirstMoviePlayer = nil;
+    [[NSNotificationCenter defaultCenter] removeObserver:AVPlayerItemDidPlayToEndTimeNotification];
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle

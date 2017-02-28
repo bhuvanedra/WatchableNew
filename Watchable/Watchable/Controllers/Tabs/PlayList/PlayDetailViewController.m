@@ -36,9 +36,9 @@
 #import "Watchable-Swift.h"
 #import "WatchableConstants.h"
 #import <CoreSpotlight/CoreSpotlight.h>
-#import <MediaPlayer/MediaPlayer.h>
 #import <MessageUI/MessageUI.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <AVKit/AVKit.h>
 
 #define kFullVideoScreenErrorViewTag 1000
 #define kVideoPlayerYaxisDelta 0
@@ -739,9 +739,6 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didRotate:) name:UIDeviceOrientationDidChangeNotification object:nil];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onClickingMoviePlayerDoneButton) name:MPMoviePlayerWillExitFullscreenNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onClickingFullScreenMoviePlayerButton) name:MPMoviePlayerWillEnterFullscreenNotification object:nil];
 }
 
 - (void)onClickingFullScreenMoviePlayerButton
@@ -4433,138 +4430,6 @@
     [self removeDimSelectedCellDetailViewSelector];
     [self.mVideoProgressTimer invalidate];
     self.mVideoProgressTimer = nil;
-}
-
-#pragma mark
-#pragma mark Movie Player Notification
-- (void)addNotificationForMoviePlayerState
-{
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(moviePlaybackStateChange:)
-                                                 name:MPMoviePlayerLoadStateDidChangeNotification
-                                               object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(moviePlaybackDidFinish:) name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
-}
-
-- (void)removeNotificationForMoviePlayerState
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
-
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerPlaybackDidFinishNotification object:nil];
-}
-- (void)moviePlaybackDidFinish:(NSNotification *)notification
-{
-    int reason = [[[notification userInfo] valueForKey:MPMoviePlayerPlaybackDidFinishReasonUserInfoKey] intValue];
-    if (reason == MPMovieFinishReasonPlaybackEnded)
-    {
-        [self postVideoProgressToServerForVideoId:self.mCurrentlyPlayingVideoId withProgressStatus:self.mCurrentlyPlayingVideoProgress];
-        self.isMoviePlaying = NO;
-        if (self.isDetailViewOverLayVisible)
-        {
-            [self removeVideoDetailView];
-        }
-        UIView *aView = [MoviePlayerSingleton getMoviePlayerView];
-        [aView removeFromSuperview];
-
-        [self performSelector:@selector(scrollToNextCell) withObject:nil afterDelay:.5];
-    }
-    else if (reason == MPMovieFinishReasonPlaybackError)
-    {
-        NSDictionary *notificationUserInfo = [notification userInfo];
-
-        NSError *mediaPlayerError = [notificationUserInfo objectForKey:@"error"];
-        if (mediaPlayerError)
-        {
-            NSLog(@"playback failed with error description: %@", [mediaPlayerError localizedDescription]);
-        }
-        else
-        {
-            NSLog(@"playback failed without any given reason");
-        }
-        if (self.mSelectedIndexPath && self.mSelectedIndexPath.row != 0)
-        {
-            NSDictionary *aDict = [NSDictionary dictionaryWithObjectsAndKeys:self.mSelectedIndexPath, @"indexPath", [NSNumber numberWithBool:NO], @"isPlayblackURIFail", nil];
-            [self performSelector:@selector(createVideoLoadingFailureErrorView:) withObject:aDict afterDelay:.5];
-        }
-
-        [[NSNotificationCenter defaultCenter] removeObserver:self name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
-    }
-}
-
-- (void)moviePlaybackStateChange:(NSNotification *)notification
-{
-    [self removeVideoLoadingFailureView];
-    __weak PlayDetailViewController *weakSelf = self;
-    int ChangeState = [MoviePlayerSingleton moviePlayer].playbackState;
-    if (ChangeState == MPMoviePlaybackStatePlaying)
-    {
-        UIView *aView = [MoviePlayerSingleton getMoviePlayerView];
-        if (self.mSelectedIndexPath && self.mSelectedIndexPath.row != 0)
-        {
-            if (self.mBrightPlayer)
-            {
-                PlayDetailCollectionViewCell *aCell = (PlayDetailCollectionViewCell *)[self.mCollectionView cellForItemAtIndexPath:self.mSelectedIndexPath];
-                aCell.mVideoImageView.userInteractionEnabled = YES;
-                [aCell.mVideoImageView addSubview:aView];
-                [aCell.mVideoImageView bringSubviewToFront:aView];
-                self.isMoviePlaying = YES;
-            }
-        }
-
-        [self performSelectorOnMainThread:@selector(createTimerToTrackMovieProgress) withObject:nil waitUntilDone:NO];
-
-        [self dimSelectedCellDetailViewAfterDelay];
-        [[NSNotificationCenter defaultCenter] removeObserver:weakSelf name:MPMoviePlayerLoadStateDidChangeNotification object:nil];
-        NSLog(@"MPMoviePlaybackStatePlaying");
-    }
-    else if (ChangeState == MPMoviePlaybackStateStopped)
-    {
-        NSLog(@"MPMoviePlaybackStateStopped");
-        [weakSelf postVideoProgressToServerForVideoId:weakSelf.mCurrentlyPlayingVideoId withProgressStatus:weakSelf.mCurrentlyPlayingVideoProgress];
-        //user hit the done button
-    }
-    else if (ChangeState == MPMoviePlaybackStatePaused)
-    {
-        NSLog(@"MPMoviePlaybackStatePaused");
-        [weakSelf postVideoProgressToServerForVideoId:weakSelf.mCurrentlyPlayingVideoId withProgressStatus:weakSelf.mCurrentlyPlayingVideoProgress];
-        //user hit the done button
-    }
-}
-- (void)createTimerToTrackMovieProgress
-{
-    if (self.mVideoProgressTimer)
-    {
-        [self.mVideoProgressTimer invalidate];
-        self.mVideoProgressTimer = nil;
-    }
-    self.mVideoProgressTimer = [NSTimer scheduledTimerWithTimeInterval:2.0f target:self selector:@selector(monitorMoviePlayerProgress) userInfo:nil repeats:YES];
-    [self.mVideoProgressTimer fire];
-}
-
-- (void)monitorMoviePlayerProgress
-{
-    MPMoviePlayerController *aMoviePlayerController = [MoviePlayerSingleton moviePlayer];
-    if (aMoviePlayerController)
-    {
-        __weak PlayDetailViewController *aWeakSelf = self;
-
-        long long aCurrentProgressTime = (long long)aMoviePlayerController.currentPlaybackTime;
-
-        aWeakSelf.mCurrentlyPlayingVideoProgress = [NSString stringWithFormat:@"%lld", aCurrentProgressTime];
-
-        long long aPreviousPosterProgress = [aWeakSelf.mPreviouslyPostedVideoProgress longLongValue];
-
-        if (aCurrentProgressTime >= aPreviousPosterProgress + 10)
-        {
-            aWeakSelf.mPreviouslyPostedVideoProgress = [NSString stringWithFormat:@"%lld", aCurrentProgressTime];
-            [aWeakSelf postVideoProgressToServerForVideoId:aWeakSelf.mCurrentlyPlayingVideoId withProgressStatus:aWeakSelf.mPreviouslyPostedVideoProgress];
-        }
-
-        if (aCurrentProgressTime < aPreviousPosterProgress)
-        {
-            aWeakSelf.mPreviouslyPostedVideoProgress = [NSString stringWithFormat:@"%lld", aCurrentProgressTime];
-        }
-    }
 }
 
 - (void)dimSelectedCellDetailViewAfterDelay
