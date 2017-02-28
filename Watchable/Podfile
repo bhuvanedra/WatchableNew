@@ -1,0 +1,37 @@
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/brightcove/BCOVSpecs.git'
+
+platform :ios, '9.0'
+
+target 'Watchable' do
+  use_frameworks!
+
+  pod 'PureLayout', '3.0.1'
+  pod 'SDWebImage', '4.0.0'
+  pod 'SwiftTweaks', :git => 'https://github.com/Khan/SwiftTweaks.git', :branch => 'master'
+  pod 'SwrveSDK', '3.4'
+  pod 'AppsFlyerFramework', '4.6.4'
+#  pod 'GoogleAnalytics'
+  pod 'Google/Analytics'
+
+  pod 'Brightcove-Player-SDK-FW', '1.0.3'
+  
+  target 'WatchableTests' do
+    inherit! :search_paths
+    
+  end
+
+  post_install do |installer|
+      installer.pods_project.targets.each do |target|
+          # Enable DEBUG flag in Swift for SwiftTweaks
+          if target.name == 'SwiftTweaks'
+              target.build_configurations.each do |config|
+                  if config.name == 'Debug'
+                      config.build_settings['OTHER_SWIFT_FLAGS'] = '-DDEBUG'
+                  end
+              end
+          end
+      end
+  end
+  
+end

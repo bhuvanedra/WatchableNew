@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SignUpLoginOverLayView">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Overlay_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="VTZ-C4-VeX">
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hq-Rb-b0K">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="D2e-Rf-REU"/>
+                        <constraint firstAttribute="width" constant="45" id="dyL-F4-9Wm"/>
+                    </constraints>
+                    <state key="normal" image="close_icon.png"/>
+                    <connections>
+                        <action selector="onClickingCancelBtn" destination="iN0-l3-epB" eventType="touchUpInside" id="d7D-yE-cde"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to content, perfected" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E8B-R6-Vfa">
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="130" id="W43-EC-2TS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aD3-aW-D96">
+                    <color key="backgroundColor" red="0.29019607843137252" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="NxV-hp-P01"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                    <state key="normal" title="Sign up">
+                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="onClickingSignUpBtn" destination="iN0-l3-epB" eventType="touchUpInside" id="WOT-2N-Zz5"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Yge-SV-c7H">
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="chP-0j-mgT"/>
+                        <constraint firstAttribute="width" constant="203" id="nDs-gj-9u8"/>
+                    </constraints>
+                    <state key="normal">
+                        <attributedString key="attributedTitle">
+                            <fragment content="Login to your account">
+                                <attributes>
+                                    <color key="NSColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <font key="NSFont" size="14" name="AvenirNext-DemiBold"/>
+                                    <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                    <integer key="NSUnderline" value="1"/>
+                                </attributes>
+                            </fragment>
+                        </attributedString>
+                    </state>
+                    <connections>
+                        <action selector="onClickingLogInBtn" destination="iN0-l3-epB" eventType="touchUpInside" id="Ggl-zg-9Lb"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="VTZ-C4-VeX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="0bE-2O-viG"/>
+                <constraint firstAttribute="trailing" secondItem="E8B-R6-Vfa" secondAttribute="trailing" constant="36" id="HKK-Wx-HCb"/>
+                <constraint firstItem="2hq-Rb-b0K" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="13" id="Ioe-f7-4K9"/>
+                <constraint firstItem="aD3-aW-D96" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="48" id="NBT-I6-Kvl"/>
+                <constraint firstItem="Yge-SV-c7H" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="V6Z-ST-1j9"/>
+                <constraint firstItem="E8B-R6-Vfa" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="210" id="Wvs-3u-v0R"/>
+                <constraint firstAttribute="trailing" secondItem="2hq-Rb-b0K" secondAttribute="trailing" constant="13" id="YYA-Lr-kIj"/>
+                <constraint firstItem="VTZ-C4-VeX" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="-1" id="YyI-dZ-5DO"/>
+                <constraint firstAttribute="trailing" secondItem="VTZ-C4-VeX" secondAttribute="trailing" id="cIz-dP-Uxr"/>
+                <constraint firstAttribute="trailing" secondItem="aD3-aW-D96" secondAttribute="trailing" constant="48" id="e2l-rI-p2h"/>
+                <constraint firstItem="Yge-SV-c7H" firstAttribute="top" secondItem="aD3-aW-D96" secondAttribute="bottom" constant="20" id="gUA-gn-Nyl"/>
+                <constraint firstAttribute="bottom" secondItem="Yge-SV-c7H" secondAttribute="bottom" constant="60" id="iFi-r5-S7s"/>
+                <constraint firstAttribute="bottom" secondItem="VTZ-C4-VeX" secondAttribute="bottom" id="pJ9-hx-Oas"/>
+                <constraint firstItem="E8B-R6-Vfa" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="36" id="uAO-Cg-HFb"/>
+            </constraints>
+            <connections>
+                <outlet property="mDescLbl" destination="E8B-R6-Vfa" id="Zlh-iu-iad"/>
+                <outlet property="mDescTopConstraint" destination="Wvs-3u-v0R" id="bgq-CM-IaC"/>
+                <outlet property="mLoginBtnPortaritBottomSpace" destination="iFi-r5-S7s" id="bbJ-8c-5k1"/>
+                <outlet property="mSignUpBtn" destination="aD3-aW-D96" id="B6f-C0-bdd"/>
+            </connections>
+            <point key="canvasLocation" x="33.5" y="54.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Overlay_background.png" width="375" height="667"/>
+        <image name="close_icon.png" width="22" height="22"/>
+    </resources>
+</document>

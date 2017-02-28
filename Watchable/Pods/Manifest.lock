@@ -1,0 +1,65 @@
+PODS:
+  - AppsFlyerFramework (4.6.4)
+  - Brightcove-Player-SDK (4.4.3)
+  - Brightcove-Player-SDK-FW (1.0.3):
+    - Brightcove-Player-SDK (~> 4.2)
+  - FirebaseAnalytics (3.7.0):
+    - FirebaseCore (~> 3.5)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.5.1):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.9)
+  - Google/Analytics (3.0.3):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
+  - Google/Core (3.0.3):
+    - FirebaseAnalytics (~> 3.2)
+  - GoogleAnalytics (3.17.0)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - PureLayout (3.0.1)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
+  - SwiftTweaks (1.1)
+  - SwrveSDK (3.4)
+
+DEPENDENCIES:
+  - AppsFlyerFramework (= 4.6.4)
+  - Brightcove-Player-SDK-FW (= 1.0.3)
+  - Google/Analytics
+  - PureLayout (= 3.0.1)
+  - SDWebImage (= 4.0.0)
+  - SwiftTweaks (from `https://github.com/Khan/SwiftTweaks.git`, branch `master`)
+  - SwrveSDK (= 3.4)
+
+EXTERNAL SOURCES:
+  SwiftTweaks:
+    :branch: master
+    :git: https://github.com/Khan/SwiftTweaks.git
+
+CHECKOUT OPTIONS:
+  SwiftTweaks:
+    :commit: ae15f7b5cb9680d0260cdf4d81c487fe4a6ba7e4
+    :git: https://github.com/Khan/SwiftTweaks.git
+
+SPEC CHECKSUMS:
+  AppsFlyerFramework: 6f331471f3d253e558a2fba292c77e49dccbfbf9
+  Brightcove-Player-SDK: bd0eb2e03d8dfa475642c1a29315d947055fa649
+  Brightcove-Player-SDK-FW: 9aa0c26d1f93b448f697319892f4d454edd86446
+  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
+  FirebaseCore: 225d40532489835a034b8f4e2c9c87fbf4f615a2
+  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
+  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
+  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
+  SwiftTweaks: af2fa4683ca52640627bf0eced46cc85a6500846
+  SwrveSDK: 19cdb6f1afda8b09413e6655e20497007adce09b
+
+PODFILE CHECKSUM: af92164d82c8e6f955e1d8662f543bd91d372f9f
+
+COCOAPODS: 1.2.0

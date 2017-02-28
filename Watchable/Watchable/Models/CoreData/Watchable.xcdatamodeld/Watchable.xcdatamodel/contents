@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Channel" representedClassName="Channel" syncable="YES">
+        <attribute name="channelTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageUri" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="isChannelFollowing" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="lastUpdateTimestamp" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="numOfVideos" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentalGuidance" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="relatedLinks" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="showDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="videos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Video" inverseName="channelInfo" inverseEntity="Video" syncable="YES"/>
+    </entity>
+    <entity name="HistoryAsset" representedClassName="HistoryAsset" syncable="YES">
+        <attribute name="mChannelId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mProgressPosition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mShowId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mTimeStamp" optional="YES" attributeType="Integer 64" defaultValueString="0" syncable="YES"/>
+        <attribute name="mType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mVideoDuration" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mVideoId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mUserProfile" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="UserProfile" inverseName="mWatchHistoryList" inverseEntity="UserProfile" syncable="YES"/>
+        <relationship name="mVideoModel" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Video" syncable="YES"/>
+    </entity>
+    <entity name="UserProfile" representedClassName="UserProfile" syncable="YES">
+        <attribute name="mLastHistorySyncTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mUserEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mUserId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="mUserName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="mWatchHistoryList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="HistoryAsset" inverseName="mUserProfile" inverseEntity="HistoryAsset" syncable="YES"/>
+    </entity>
+    <entity name="Video" representedClassName="Video" syncable="YES">
+        <attribute name="channelId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="channelTitle" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="episode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageUri" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="liveBroadcastTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="parentalGuidance" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="playbackItems" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="relatedLinks" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="shortDesc" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="showId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="uniqueId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="channelInfo" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Channel" inverseName="videos" inverseEntity="Channel" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="HistoryAsset" positionX="-63" positionY="9" width="128" height="180"/>
+        <element name="UserProfile" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Video" positionX="-54" positionY="90" width="128" height="285"/>
+        <element name="Channel" positionX="-54" positionY="135" width="128" height="225"/>
+    </elements>
+</model>

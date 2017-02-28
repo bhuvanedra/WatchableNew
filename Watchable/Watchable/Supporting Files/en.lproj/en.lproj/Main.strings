@@ -1,0 +1,12 @@
+
+/* Class = "UITabBarItem"; title = "Genre"; ObjectID = "HLj-g0-qt8"; */
+"HLj-g0-qt8.title" = "Genre";
+
+/* Class = "UILabel"; text = "CATEGORY"; ObjectID = "P7l-38-IpM"; */
+"P7l-38-IpM.text" = "CATEGORY";
+
+/* Class = "UITabBarItem"; title = "PlayList"; ObjectID = "UxR-M9-tCF"; */
+"UxR-M9-tCF.title" = "PlayList";
+
+/* Class = "UILabel"; text = "5 video / 1:10:37"; ObjectID = "VJQ-he-10o"; */
+"VJQ-he-10o.text" = "5 video / 1:10:37";

@@ -1,0 +1,20 @@
+//
+//  Watchable-Prefix.pch
+//  Watchable
+//
+//  Created by Raja Indirajith on 09/04/15.
+//  Copyright (c) 2015 comcast. All rights reserved.
+//
+
+#ifndef Watchable_Watchable_Prefix_pch
+#define Watchable_Watchable_Prefix_pch
+
+#import <UIKit/UIKit.h>
+#import "WatchableConstants.h"
+#import "Utilities.h"
+#import "Reachability.h"
+#import "DBHandler.h"
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif

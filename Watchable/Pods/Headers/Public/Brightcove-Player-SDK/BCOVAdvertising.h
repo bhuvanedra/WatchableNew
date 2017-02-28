@@ -1,0 +1,1 @@
+../../../Brightcove-Player-SDK/Headers/BCOVAdvertising.h

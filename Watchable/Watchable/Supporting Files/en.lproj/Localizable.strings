@@ -1,0 +1,99 @@
+/* Error message for a general server error */
+"A server error occurred" = "A server error occurred";
+
+/* Error message for a general server error, should try again */
+"A server error occurred, please try again" = "A server error occurred, please try again";
+
+/* The 'email not set up' alert's title
+   The 'network offline' alert's title */
+"Alert" = "Alert";
+
+/* The 'logout' alert's message */
+"Are you sure?" = "Are you sure?";
+
+/* One of the 'generic Watchable' alert's messages */
+"Can't share this Playlist at the moment." = "Can't share this Playlist at the moment.";
+
+/* One of the 'generic Watchable' alert's messages */
+"Can't share this Video at the moment." = "Can't share this Video at the moment.";
+
+/* One of the 'logout' alert's buttons */
+"Cancel" = "Cancel";
+
+/* The description for a video */
+"description" = "description";
+
+/* The title of the Explore */
+"Explore" = "Explore";
+
+/* The title of the Feed */
+"Feed" = "Feed";
+
+/* The title for a button when the user is following */
+"follow" = "follow";
+
+/* The title for a button when the user is not following */
+"following" = "following";
+
+/* One of the 'logout' alert's buttons */
+"Log Out" = "Log Out";
+
+/* The 'network offline' alert's message */
+"Network connection appears to be offline." = "Network connection appears to be offline.";
+
+/* The 'email not set up' alert's message */
+"No registered email accounts. Add an account in Mail Settings." = "No registered email accounts. Add an account in Mail Settings.";
+
+/* One of the 'generic Watchable' alert's messages */
+"Not able to post. Please try later" = "Not able to post. Please try later";
+
+/* The 'email not set up' alert's only button
+   The 'generic Watchable' alert's only button
+   The 'network offline' alert's only button */
+"Ok" = "Ok";
+
+/* One of the 'generic Watchable' alert's messages */
+"Please Edit Email Id to save profile." = "Please Edit Email Id to save profile.";
+
+/* One of the 'generic Watchable' alert's messages */
+"Please Edit Username to save profile." = "Please Edit Username to save profile.";
+
+/* One of the 'generic Watchable' alert's messages */
+"Please save your email id before sending confirmation." = "Please save your email id before sending confirmation.";
+
+/* Formatted Posted on (date) */
+"Posted on %@" = "Posted on %@";
+
+/* The title of the Preferences */
+"Preferences" = "Preferences";
+
+/* The title of the Saved */
+"Saved" = "Saved";
+
+/* Error message when generating a bitly url */
+"There was an error generating your request, please try again shortly." = "There was an error generating your request, please try again shortly.";
+
+/* Button title for Try again */
+"Try again" = "Try again";
+
+/* The 'generic Watchable' alert's title */
+"Watchable" = "Watchable";
+
+/* One of the 'generic Watchable' alert's messages */
+"You're not connected to the internet" = "You're not connected to the internet";
+
+/* Error message when not connected to the internet */
+"You're not connected to the Internet" = "You're not connected to the Internet";
+
+/* Error when not connected to the internet, should try again */
+"You're not connected to the Internet, check your network connection and try again" = "You're not connected to the Internet, check your network connection and try again";
+
+/* One of the 'generic Watchable' alert's messages */
+"Your confirmation email has been re-sent." = "Your confirmation email has been re-sent.";
+
+/* One of the 'generic Watchable' alert's messages */
+"Your password has been changed" = "Your password has been changed";
+
+/* One of the 'generic Watchable' alert's messages */
+"Your profile has been updated" = "Your profile has been updated";
+

@@ -1,0 +1,46 @@
+# Find all the available rules by running:
+  # swiftlint rules
+
+disabled_rules:
+  - line_length
+  
+opt_in_rules:
+  - attributes
+  - closure_end_indentation
+  - closure_spacing
+  - conditional_returns_on_newline
+  - empty_count
+  - explicit_init
+  - file_header
+  - first_where
+  - force_unwrapping
+  - nimble_operator
+  - number_separator
+  - object_literal
+  - operator_usage_whitespace
+  - overridden_super_call
+  - private_outlet
+  - prohibited_super_call
+  - redundant_nil_coalescing
+  - sorted_imports
+  - switch_case_on_newline
+
+included:
+  - Watchable
+  - WatchableTests
+
+excluded:
+  - Carthage
+  - Pods
+  - Scripts
+  - Vendor
+  
+file_header:
+  required_pattern: |
+                    \/\/
+                    \/\/  .*?\.swift
+                    \/\/  Watchable
+                    \/\/
+                    \/\/  Created by .*? on \d{1,2}\/\d{1,2}\/\d{2}\.
+                    \/\/  Copyright © \d{4} comcast\. All rights reserved\.
+                    \/\/
